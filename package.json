@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/daniel5075/FriendFinder/issues"
   },
-  "homepage": "https://github.com/daniel5075/FriendFinder#readme"
+  "homepage": "https://github.com/daniel5075/FriendFinder#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
