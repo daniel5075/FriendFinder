@@ -45,7 +45,7 @@
             </h3>
             <h4>I like to read for fun</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question2">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -58,7 +58,7 @@
             </h3>
             <h4>Religion is important to me</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question3">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -71,7 +71,7 @@
             </h3>
             <h4>I am a night owl</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question4">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -84,7 +84,7 @@
             </h3>
             <h4>I like to go to parties</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question5">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -97,7 +97,7 @@
             </h3>
             <h4>I like exercising</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question6">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -110,7 +110,7 @@
             </h3>
             <h4>I have lots of friends</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question7">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -123,7 +123,7 @@
             </h3>
             <h4>I am outgoing</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question8">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -136,7 +136,7 @@
             </h3>
             <h4>I like to travel</h4>
             <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question9">
-                <option disabled selected>Select an option</option>
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -148,8 +148,8 @@
                 <strong>Question 10</strong>
             </h3>
             <h4>I like to spend vacations with my family</h4>
-            <select data-placeholder="Select an Option" class="chosen-select" tabindex="-1" id="question10">
-                <option disabled selected>Select an option</option>
+            <select span="Select an Option" class="chosen-select" tabindex="-1" id="question10">
+                <option disabled selected value="0">Select an option</option>
                 <option value="1">1 Strongly Disagree</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -194,11 +194,12 @@
     $("#submit").on("click", function (event) {
         event.preventDefault();
         // check for completed form
+        console.log($("#question1").val())
         var check = true;
-        if ($("#name").val() === "" || $("#photo").val() === "" || $("#question1").val() === "" ||
-            $("#question2").val() === "" || $("#question3").val() === "" || $("#question4").val() === ""
-            || $("#question5").val() === "" || $("#question6").val() === "" || $("#question7").val() === ""
-            || $("#question8").val() === "" || $("#question9").val() === "" || $("#question10").val() === "") {
+        if ($("#name").val() === "" || $("#photo").val() === "" || $("#question1").val() === null ||
+            $("#question2").val() === null || $("#question3").val() === null || $("#question4").val() === null
+            || $("#question5").val() === null || $("#question6").val() === null || $("#question7").val() === null
+            || $("#question8").val() === null || $("#question9").val() === null || $("#question10").val() === null) {
             check = false;
             $("#notCompleted").text("Please make sure all areas are filled out");
         };
@@ -219,12 +220,13 @@
                     $("#question10").val()
                 ]
             };
-        };
 
-        $.post("/api/friends", survey, function (data) {
-            $("#friendName").text(data.name);
-            $("#friendPic").attr("src", data.photo)
-        });
-        $('.modal').modal();
+
+            $.post("/api/friends", survey, function (data) {
+                $("#friendName").text(data.name);
+                $("#friendPic").attr("src", data.photo)
+            });
+            $('.modal').modal();
+        };
     });
 </script>
